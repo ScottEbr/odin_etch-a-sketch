@@ -42,8 +42,47 @@ header {
     flex-direction: column;
     width: 100px;
     align-items: center;
+    background-color: var(--bg-200);
+    color: var(--text-100);
+    border-radius: 8px;
+    padding: 14px;
+    width: 150px;
+}
+
+.menu button {
+    background-color: var(--bg-300);
+    border: none;
+    color: var(--text-100);
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 8px 0px 8px 0px;
     
 }
+
+.menu button:hover {
+    background-color: var(--accent-100);
+    transition: 0.3s ease;
+    box-shadow:
+        inset 2px 2px 3px rgb(255 255 255 / 0.6),
+        inset -2px -2px 3px rgb(0 0 0 / 0.6);
+
+}
+
+.menu button.active {
+    background-color: var(--accent-100);
+    box-shadow:
+        inset -2px -2px 3px rgb(255 255 255 / 0.6),
+        inset 2px 2px 3px rgb(0 0 0 / 0.6);
+        
+}
+
+
+
 
 .etch-container {
     border: 8px solid black;
@@ -60,4 +99,40 @@ header {
 .grid-item {
     border: thin solid var(--bg-300);
     box-sizing: border-box;
+}
+
+.slidecontainer {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-100);
+}
+
+.slider {
+    -webkit-appearance: none; /* REQUIRED for Chrome/Edge/Safari */
+      width: 100%;
+    height: 6px;
+    background: #ccc; /* Track color */
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Chrome/Edge/Safari */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--accent-100);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Firefox */
+.slider::-moz-range-thumb {
+    background: var(--accent-100);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
 }

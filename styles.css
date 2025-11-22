@@ -49,6 +49,12 @@ header {
     width: 150px;
 }
 
+.colorChoice {
+    width: 80px;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
 .menu button {
     background-color: var(--bg-300);
     border: none;
@@ -61,6 +67,8 @@ header {
     border-radius: 8px;
     font-weight: bold;
     margin: 8px 0px 8px 0px;
+    width: 150px;
+    height: 50px;
     
 }
 
@@ -81,13 +89,10 @@ header {
         
 }
 
-
-
-
 .etch-container {
     border: 8px solid black;
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
     border-radius: 8px;
 
     display: flex;
@@ -101,6 +106,10 @@ header {
     box-sizing: border-box;
 }
 
+.no-borders .grid-item {
+    border: none;
+}
+
 .slidecontainer {
     margin-top: 32px;
     display: flex;
@@ -111,7 +120,7 @@ header {
 
 .slider {
     -webkit-appearance: none; /* REQUIRED for Chrome/Edge/Safari */
-      width: 100%;
+    width: 100%;
     height: 6px;
     background: #ccc; /* Track color */
     border-radius: 5px;

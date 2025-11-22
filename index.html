@@ -14,10 +14,15 @@
     <div class="body-container">
         <div class="menu">
             <h2>Menu</h2>
-            <button class="randRGBBtn">WRITING #1</button>
-            <button>WRITING #1</button>
-            <button>WRITING #1</button>
-            <button>WRITING #1</button>
+            <p>Colour:</p>
+            <input type="color" id="colorChoice" class="colorChoice" name="colorChoice" value="#ff0000">
+            <button class="colorMode">COLOUR</button>
+            <button class="randRGBBtn">RGB</button>
+            <button class="darkBtn">DARKEN</button>
+            <button class="lightBtn">LIGHTEN</button>
+
+            <button class="gridBtn">GRID TOGGLE</button>
+            <button class="clearBtn">CLEAR</button>
             <div class="slidecontainer">
                 <input type="range" min="1" max="64" value="32" class="slider" id="myRange">
                 <p>Value: <span id="demo"></span></span></p>

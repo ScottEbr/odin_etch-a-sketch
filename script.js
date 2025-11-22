@@ -7,6 +7,19 @@ gridContainer.addEventListener('mouseleave',() => isDrawing = false);
 
 gridContainer.addEventListener('mousedown', e => e.preventDefault()); // Fixes no-access cursor when selecting buttons and drawing quickly
 
+createGrid(32) // initialise sheet with the same value as input range. Refer to html, class="slider"
+
+// Displays slider value on page, and uses slider value when creating grid.
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // DISPLAYS DEFAULT SLIDER VALUE
+
+slider.oninput = function() {
+    output.innerHTML = this.value;
+    createGrid(this.value)
+}
+
+// Create grid, didn't use CSS grid as per project instruction. Maintained flex-box fromatting.
 function createGrid(size) {
 
     gridContainer.innerHTML = ""
@@ -22,14 +35,11 @@ function createGrid(size) {
         drawCell(cell)
 
         gridContainer.appendChild(cell);
-        cell.style.backgroundColor = 'white';
+        cell.style.backgroundColor = 'white'; // default background colour
     }
-    
-    
 }
 
-createGrid(32) // initialise sheet with the same value as input range. Refer to html, class="slider"
-
+// Handle to colour cell on mousedown (clicking annd dragging), and on initial click
 function drawCell(cell) {
     
     // paint on hover while mouse is held
@@ -44,8 +54,7 @@ function drawCell(cell) {
 
 }
 
-
-
+// Handles all drawing, pending on what button is active.
 function draw(cell) {
     const element = document.querySelector('.randRGBBtn'); 
     const dark = document.querySelector('.darkBtn')
@@ -54,31 +63,27 @@ function draw(cell) {
     const color = document.querySelector('.colorChoice').value;
     const colorMode = document.querySelector('.colorMode')
 
-    // Check if the element has the 'active' class
     if (element.classList.contains('active')) {
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);
         cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-        // Perform actions if the class is present
 
     } else if (dark.classList.contains('active')) {
         cell.style.backgroundColor = darkenCell(cell); 
-        // Perform actions if the class is not present
 
     } else if (light.classList.contains('active')) {
         cell.style.backgroundColor = lightenCell(cell); 
         
     } else if (colorMode.classList.contains('active')) {
         cell.style.backgroundColor = color;  
-    
+
     } else {
         cell.style.backgroundColor = 'black'
-        // Perform actions if the class is not present
+        
     }
     
 }
-
 
 function darkenCell(cell) {
     // Get its current color (computed style)
@@ -108,6 +113,7 @@ function lightenCell(cell) {
     cell.style.backgroundColor = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
 }
 
+// RGB to HSL converter
 function rgbToHsl(rgbString) {
     // Extract numbers: rgb(a, b, c) → [a, b, c]
     const rgb = rgbString.match(/\d+/g).map(Number);
@@ -139,35 +145,21 @@ function rgbToHsl(rgbString) {
     };
 }
 
-// SLIDER OUTPUT
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value; // DISPLAYS DEFAULT SLIDER VALUE
-
-// UPDATE SLIDER VALUE WHEN SLIDING
-slider.oninput = function() {
-    output.innerHTML = this.value;
-    createGrid(this.value)
-}
-
-
-// TOGGLES BUTTONS TO BE ACTIVE
+// Handles buttons getting toggled.
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('Button');
-    const clear = document.querySelector('.clearBtn')
+    const clear = document.querySelector('.clearBtn');
+    const color = document.querySelector('.colorMode');
 
     buttons.forEach(button => {
         button.addEventListener('mousedown', function() {
-            // If this is the grid button, do NOT affect others. Just toggle it.
+            // Allows for toggling of "Grid Toggle" button, and won't toggle off if other buttons are pressed.
             if (this.classList.contains('gridBtn')) {
                 this.classList.toggle('active');
-
-                 document.querySelector('.etch-container').classList.toggle('no-borders');
-
-                return; // stop here, don't deselect others
+                document.querySelector('.etch-container').classList.toggle('no-borders');
+                return;
             }
 
-            // Otherwise: remove active from all NON-grid buttons
             buttons.forEach(btn => {
                 if (!btn.classList.contains('gridBtn')) {
                     btn.classList.remove('active');
@@ -177,19 +169,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add 'active' class to the clicked button
             this.classList.add('active');
 
-
         });
 
     });
 
-
+    // Clear button EventListern on mouseup (rather than click), so we still get to see the style on mouse down. Delete grid, then re-initialises based off slider value.
     clear.addEventListener('mouseup', function() {
-        // Add 'active' class to the clicked button
         document.querySelector(".etch-container").innerHTML = '';
         createGrid(slider.value)
 
         this.classList.remove('active');
-
+        color.classList.add('active')
 
     });
 
